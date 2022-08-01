@@ -19,8 +19,9 @@ const UserResults = () => {
                 Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
             }
         })
-      
+        
         const data = await response.json()
+       
         setUsers(data)
         setLoading(false)
     }
