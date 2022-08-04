@@ -1,14 +1,18 @@
-import { createContext, useState } from "react";
-
+import { createContext, useReducer } from "react";
+import profilReducer from "./ProfilReducer";
 const ProfileContext = createContext()
 
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
 
 export const ProfileProvider = ({children}) =>{ 
-    const [users,setUsers] = useState([])
-    const [loading,setLoading] = useState(true)
+    const initialState = {
+        users: [],
+        loading:  true
+    }
 
+
+    const [state,dispatch ] = useReducer(profilReducer,initialState)
 
     const fetchUsers = async () => {
         const response = await fetch(`${GITHUB_URL}/users`,
@@ -20,14 +24,16 @@ export const ProfileProvider = ({children}) =>{
         
         const data = await response.json()
        
-        setUsers(data)
-        setLoading(false)
+        dispatch({
+            type:'GET_USERS',
+            payload: data,// from fetch 
+        })
     }
 
 
     return <ProfileContext.Provider value={{
-            users,
-            loading,
+            users:state.users,
+            loading:state.loading,
             fetchUsers
         }}>
         {children}
