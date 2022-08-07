@@ -8,13 +8,17 @@ const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
 export const ProfileProvider = ({children}) =>{ 
     const initialState = {
         users: [],
-        loading:  true
+        loading:  false
     }
 
 
     const [state,dispatch ] = useReducer(profilReducer,initialState)
 
+
+      
     const fetchUsers = async () => {
+        setLoading()
+
         const response = await fetch(`${GITHUB_URL}/users`,
         {
             headers:{
@@ -30,6 +34,9 @@ export const ProfileProvider = ({children}) =>{
         })
     }
 
+    const setLoading = () => dispatch({
+        type:'SET_LOADING'
+    })
 
     return <ProfileContext.Provider value={{
             users:state.users,

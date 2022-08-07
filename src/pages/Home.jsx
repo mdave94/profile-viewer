@@ -1,11 +1,13 @@
 import UserResults from "../components/users/UserResults";
+import UserSerch from "../components/users/UserSerch";
+
 
 const Home = () => {
     return ( 
         <>
-        {/* Serch component is still need here */}
-           <UserResults/>
-                
+         <UserSerch/>
+         <UserResults/>
+
         </>
      );
 }

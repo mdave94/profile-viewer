@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react"
+import {  useContext } from "react"
 import Spinner from "../layouts/Spinner"
 import UserItem from "./UserItem"
 import ProfileContext from "../../context/github/ProfileContext"
@@ -7,11 +7,9 @@ import ProfileContext from "../../context/github/ProfileContext"
 
 const UserResults = () => {
 
-    const {users,loading,fetchUsers} = useContext(ProfileContext)
+    const {users,loading} = useContext(ProfileContext)
 
-    useEffect(()=>{
-        fetchUsers()
-    },[])
+
 
     if(!loading){
         return ( 
