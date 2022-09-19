@@ -6,7 +6,7 @@ import ProfileContext from "../../context/github/ProfileContext"
 
 
 const UserResults = () => {
-
+    
     const {users,loading} = useContext(ProfileContext)
 
 

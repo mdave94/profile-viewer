@@ -1,11 +1,12 @@
-const profilReducer = (state,action)  =>{
+const profileReducer = (state,action)  =>{
     switch(action.type ){
         case 'GET_USERS':
             return {
                 ...state,
-                users:action.payload,
+                users: action.payload,
                 loading: false
             }
+             
         case 'SET_LOADING':
             return{
                 ...state,
@@ -17,4 +18,4 @@ const profilReducer = (state,action)  =>{
 }
 
 
-export default profilReducer
+export default profileReducer
