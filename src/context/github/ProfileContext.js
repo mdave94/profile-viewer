@@ -14,13 +14,10 @@ export const ProfileProvider = ({children}) =>{
 
     const [state,dispatch ] = useReducer(profileReducer,initialState)
     
-
     const searchUsers = async (text) => {    
        
         setLoading()
 
- 
-        
         const response = await fetch(`${GITHUB_URL}/search/users?q=${text}`,
         {
             headers:{
@@ -30,8 +27,6 @@ export const ProfileProvider = ({children}) =>{
         
         const {items} = await response.json()
 
-        console.log("data in fetch")
-
         dispatch({
             type:'GET_USERS',
             payload: items,// from playload , datasctucure 
@@ -39,14 +34,24 @@ export const ProfileProvider = ({children}) =>{
 
     }
 
-    const setLoading = () => dispatch({
-        type:'SET_LOADING'
-    })
+
+    const clearUsers = () => {
+       const users = []
+
+        dispatch({
+            type:'CLEAR_USERS',
+            payload: users
+        })
+    }
+
+    //LOADING SPINNER
+    const setLoading = () => dispatch({  type:'SET_LOADING'  })
 
     return <ProfileContext.Provider value={{
             users: state.users,
             loading: state.loading,
-            searchUsers 
+            searchUsers,
+            clearUsers 
         }}>
         {children}
     </ProfileContext.Provider>

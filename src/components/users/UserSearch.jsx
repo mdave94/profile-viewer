@@ -6,15 +6,13 @@ import ProfileContext from '../../context/github/ProfileContext'
 
 const UserSerch = () => {
   const [text,setText] = useState('')
+  
 
-  const {users,searchUsers} = useContext(ProfileContext)
-
-
+  const {users,searchUsers,clearUsers} = useContext(ProfileContext)
 
   const handleChange = (e)=>{
       setText(e.target.value)
   }
-
 
 
   const handleSubmit = (e)=>{
@@ -47,7 +45,7 @@ const UserSerch = () => {
       </div>
       {users.length > 0 && (
                 <div>
-                <button className='btn btn-ghost btn-lg'>
+                <button onClick={clearUsers} className='btn btn-ghost btn-lg'>
                     Clear
                 </button>
                 </div>
