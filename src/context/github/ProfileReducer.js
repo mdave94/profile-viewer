@@ -15,6 +15,8 @@ const profileReducer = (state,action)  =>{
 
 
         case 'CLEAR_USERS':
+            console.log("state")
+            console.log(state)
             return{
                 ...state, 
                 users:action.payload
