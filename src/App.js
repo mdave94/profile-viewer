@@ -7,6 +7,8 @@ import About from './pages/About'
 import NotFound from './pages/NotFound'
 import { ProfileProvider } from './context/github/ProfileContext'
 import { AlertProvider } from './context/alert/AlertContext'
+import Alert from './components/layouts/Alert';
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
               <div className='flex flex-col justify-between  h-screen'>
                 <Navbar/>
                     <main className='container mx-auto  px-3 pb-12'>
+                      <Alert/>
                       <Routes>
                         <Route exact path ="/" element={<Home/>}/>
                         <Route path ="about" element={<About/>}/>

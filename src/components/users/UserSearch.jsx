@@ -1,14 +1,17 @@
 import React from 'react'
 import { useContext,useState } from 'react'
 import ProfileContext from '../../context/github/ProfileContext'
-
+import AlertContext from '../../context/alert/AlertContext'
 
 
 const UserSerch = () => {
   const [text,setText] = useState('')
   
-
+  // From ProfileContext
   const {users,searchUsers,clearUsers} = useContext(ProfileContext)
+
+ //From AlertContext
+  const {setAlert} = useContext(AlertContext)
 
   const handleChange = (e)=>{
       setText(e.target.value)
@@ -19,7 +22,7 @@ const UserSerch = () => {
     e.preventDefault()
 
     if (text===''){
-      alert('Missing text')
+      setAlert('Missing search field ','error')
     }else{
       searchUsers(text)
     }
