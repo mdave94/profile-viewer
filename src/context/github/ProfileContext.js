@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import { createContext, useReducer } from "react";
 import profileReducer from "./ProfileReducer";
 const ProfileContext = createContext()
@@ -39,7 +40,7 @@ export const ProfileProvider = ({children}) =>{
        
         setLoading()
 
-        const response = await fetch(`${GITHUB_URL}/search/users/${login}`,
+        const response = await fetch(`${GITHUB_URL}/users/${login}`,
         {
             headers:{
                 Authorization: `token ${GITHUB_TOKEN}`
@@ -56,8 +57,8 @@ export const ProfileProvider = ({children}) =>{
                 payload: data,// single user's data  
             })
         }
-        
-       
+        console.log("response") 
+       console.log(response)
 
     } 
 

@@ -15,7 +15,7 @@ useEffect(()=>{
 
 
   return (
-    <div>User</div>
+    <div>{user.login}</div>
   )
 }
 
