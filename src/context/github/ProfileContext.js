@@ -8,6 +8,7 @@ const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
 export const ProfileProvider = ({children}) =>{ 
     const initialState = {
         users: [],
+        user:{},
         loading:  false
     }
 
@@ -33,7 +34,32 @@ export const ProfileProvider = ({children}) =>{
         })
 
     }
+    /* GET USER DATAS*/
+    const getUser = async (login) => {    
+       
+        setLoading()
 
+        const response = await fetch(`${GITHUB_URL}/search/users/${login}`,
+        {
+            headers:{
+                Authorization: `token ${GITHUB_TOKEN}`
+            }
+        })
+
+        if (response.status === 404){
+            window.location = '/notfound'
+        }else{
+            const data = await response.json()
+
+            dispatch({
+                type:'GET_USER',
+                payload: data,// single user's data  
+            })
+        }
+        
+       
+
+    } 
 
     const clearUsers = () => {
        const users = []
@@ -51,7 +77,9 @@ export const ProfileProvider = ({children}) =>{
             users: state.users,
             loading: state.loading,
             searchUsers,
-            clearUsers 
+            clearUsers,
+            user: state.user,
+            getUser
         }}>
         {children}
     </ProfileContext.Provider>

@@ -16,7 +16,7 @@ const UserItem = ({user: {login,avatar_url}}) => {
         </div>
         <div>
             <h2 className="card-title">{login}</h2>
-            <Link to={`/users/${login}`} className='text-base-content text-opacirty-40'>Visit profile</Link>
+            <Link to={`/user/${login}`} className='text-base-content text-opacirty-40'>Visit profile</Link>
         </div>
      </div>
       

@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound'
 import { ProfileProvider } from './context/github/ProfileContext'
 import { AlertProvider } from './context/alert/AlertContext'
 import Alert from './components/layouts/Alert';
+import User from './pages/User';
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
                       <Alert/>
                       <Routes>
                         <Route exact path ="/" element={<Home/>}/>
-                        <Route path ="about" element={<About/>}/>
+                        <Route path ="/about" element={<About/>}/>
+                        <Route path ="/user/:login" element={<User/>}/>
                         <Route path ="/notfound" element={<NotFound/>}/>
                         <Route path ="/*" element={<NotFound/>}/>
                       </Routes>
