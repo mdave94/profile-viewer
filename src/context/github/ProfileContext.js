@@ -57,9 +57,7 @@ export const ProfileProvider = ({children}) =>{
                 payload: data,// single user's data  
             })
         }
-        console.log("response") 
-       console.log(response)
-
+  
     } 
 
     const clearUsers = () => {
