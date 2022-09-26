@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import RepoItem from './RepoItem'
 
 const RepoList = ({repos} ) => {
 
@@ -12,9 +13,7 @@ const RepoList = ({repos} ) => {
                 Repos
             </h2>
             {repos.map((repo)=> (
-               <h3 key={repo.id}>
-                {repo.name}
-               </h3>
+             <RepoItem repo={repo} key={repo.id}/>
             ))}
         </div>
     </div>
