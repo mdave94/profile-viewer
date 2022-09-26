@@ -4,15 +4,18 @@ import ProfileContext from "../context/github/ProfileContext"
 import { useParams } from "react-router-dom"
 import { Link } from 'react-router-dom'
 import Spinner    from '../components/layouts/Spinner'
+import RepoList from '../components/repos/RepoList'
+
 
 const User = () => {
  
-const {getUser, user,loading} = useContext(ProfileContext)
+const {getUser, user,loading,getRepos,repos} = useContext(ProfileContext)
 
 const params = useParams()
 
 useEffect(()=>{
     getUser(params.login)
+    getRepos(params.login)
 
 },[])
 
@@ -39,7 +42,6 @@ if(loading){
 }else{
 
 }
-
 
 
   return (
@@ -86,6 +88,8 @@ if(loading){
             </div>
 
         </div>
+        {/* Repolist Component  */}
+        <RepoList repos={repos}/>
     </div>
   )
 }

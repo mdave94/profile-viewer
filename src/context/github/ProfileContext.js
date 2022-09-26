@@ -1,8 +1,8 @@
-import { data } from "autoprefixer";
 import { createContext, useReducer } from "react";
 import profileReducer from "./ProfileReducer";
-const ProfileContext = createContext()
 
+
+const ProfileContext = createContext()
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
 
@@ -10,6 +10,7 @@ export const ProfileProvider = ({children}) =>{
     const initialState = {
         users: [],
         user:{},
+        repos:[],
         loading:  false
     }
 
@@ -60,6 +61,33 @@ export const ProfileProvider = ({children}) =>{
   
     } 
 
+/*GET REPOS */
+const getRepos = async (login) => {    
+
+    setLoading()
+
+    const params = new URLSearchParams({
+        sort:'creted',
+        per_page: 10
+    })
+
+    const response = await fetch(`${GITHUB_URL}/users/${login}/repos?${params}`,
+    {
+        headers:{
+            Authorization: `token ${GITHUB_TOKEN}`
+        }
+    })
+    
+    const data = await response.json()
+    
+    dispatch({
+        type:'GET_REPOS',
+        payload: data,// from playload , datasctucure 
+    })
+
+}
+
+/* Clear all user */
     const clearUsers = () => {
        const users = []
 
@@ -75,10 +103,13 @@ export const ProfileProvider = ({children}) =>{
     return <ProfileContext.Provider value={{
             users: state.users,
             loading: state.loading,
+            repos:state.repos,
+            user: state.user,
             searchUsers,
             clearUsers,
-            user: state.user,
-            getUser
+            getUser,
+            getRepos
+            
         }}>
         {children}
     </ProfileContext.Provider>
